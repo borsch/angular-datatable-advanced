@@ -1,0 +1,17 @@
+<div>
+  <mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
+    <ng-container *ngFor="let column of columns" matColumnDef="{{column.columnKey}}">
+      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!column.sortable">{{column.columnName}}</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{renderCell(row, column)}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="getColumns()"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: getColumns()"></mat-row>
+  </mat-table>
+
+  <mat-card *ngIf="loading$ | async" style="display: flex; justify-content: center; align-items: center">
+    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  </mat-card>
+
+  <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+</div>

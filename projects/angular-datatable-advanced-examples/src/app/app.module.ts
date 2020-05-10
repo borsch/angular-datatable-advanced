@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AngularDatatableAdvancedModule } from 'angular-datatable-advanced';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {AngularDatatableAdvancedModule} from '../../../angular-datatable-advanced/src/lib/angular-datatable-advanced.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -11,7 +13,11 @@ import { AngularDatatableAdvancedModule } from 'angular-datatable-advanced';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    AngularDatatableAdvancedModule,
+    AngularDatatableAdvancedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
