@@ -1,9 +1,30 @@
 {
   "name": "angular-datatable-advanced",
-  "version": "0.0.2",
+  "description": "Angular DataTable with advanced filter & sorting functionality",
+  "version": "0.0.3",
   "peerDependencies": {
     "@angular/common": "^9.1.6",
     "@angular/core": "^9.1.6",
     "tslib": "^1.10.0"
-  }
+  },
+  "author": {
+    "email": "oleh.kurpiak@gmail.com",
+    "name": "Oleh Kurpiak",
+    "url": "https://github.com/borsch"
+  },
+  "repository": {
+    "url": "git+https://github.com/borsch/angular-datatable-advanced.git",
+    "type": "git"
+  },
+  "keywords": [
+    "angular",
+    "datatable",
+    "sorting",
+    "filtering"
+  ],
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/borsch/angular-datatable-advanced/issues"
+  },
+  "homepage": "https://github.com/borsch/angular-datatable-advanced#readme"
 }

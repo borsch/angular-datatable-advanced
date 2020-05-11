@@ -20,7 +20,6 @@
     "e2e": "ng e2e",
     "mock-backend": "json-server --watch ./mock-backend/data.json --port 3000"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~9.1.6",
     "@angular/cdk": "^9.2.3",
