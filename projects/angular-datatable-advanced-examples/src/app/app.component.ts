@@ -24,14 +24,16 @@ export class AppComponent {
       filterable: true
     }, {
       columnKey: 'nametype',
-      columnName: 'Name type',
-      sortable: false,
-      filterable: false
+      columnName: 'Name type'
     }, {
       columnKey: 'recclass',
-      columnName: 'Record class',
-      sortable: false,
-      filterable: false
+      columnName: 'Record class'
+    }, {
+      columnKey: 'geolocation.type',
+      columnName: 'Geolocation type'
+    }, {
+      columnKey: 'geolocation.coordinates',
+      columnName: 'Coordinates'
     }
   ];
 

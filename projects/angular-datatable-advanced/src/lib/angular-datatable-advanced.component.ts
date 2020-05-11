@@ -6,6 +6,7 @@ import {asapScheduler, BehaviorSubject, Observable, of, scheduled} from 'rxjs';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {RowsLoader} from './model/models';
 import {Column} from './model/column';
+import {subscriptionLogsToBeFn} from 'rxjs/internal/testing/TestScheduler';
 
 @Component({
   selector: 'ada-table',
@@ -58,7 +59,17 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
   }
 
   renderCell(row: any, column: Column) {
-    return row[column.columnKey];
+    return this.getValueRecursively(row, column.columnKey.split('.'));
+  }
+
+  private getValueRecursively(object: any, propsPath: Array<string>) {
+    const nextKey = propsPath[0];
+
+    if (propsPath.length > 1) {
+      return object ? this.getValueRecursively(object[nextKey], propsPath.slice(1, propsPath.length)) : null;
+    } else {
+      return object ? object[nextKey] : null;
+    }
   }
 
   getColumns() {
