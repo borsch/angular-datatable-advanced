@@ -34,7 +34,9 @@ export class AppComponent {
     }, {
       columnKey: 'geolocation.coordinates',
       columnName: 'Coordinates',
-      cellRender: (row) => `LNG: ${row.geolocation.coordinates[0]}, LAT: ${row.geolocation.coordinates[1]}`
+      cellRender: (row) => `LNG: ${row.geolocation.coordinates[0]}, LAT: ${row.geolocation.coordinates[1]}`,
+      sortable: true,
+      filterable: true
     }
   ];
 

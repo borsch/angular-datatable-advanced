@@ -1,0 +1,15 @@
+<div class="filter-icon" style="cursor: pointer;">
+  <mat-icon [matMenuTriggerFor]="menu">search</mat-icon>
+  <mat-menu #menu="matMenu" class="filter-menu">
+    <div mat-menu-item (click)="ignoreMenuClick($event);">
+      Filter
+    </div>
+    <div mat-menu-item (click)="ignoreMenuClick($event);">
+      <input matInput placeholder="Filter">
+    </div>
+    <div mat-menu-item>
+      <button>Apply filter</button>
+      <button>Apply filter</button>
+    </div>
+  </mat-menu>
+</div>

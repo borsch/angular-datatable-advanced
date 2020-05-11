@@ -9,10 +9,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
+import {FilterComponent} from './components/filter/filter.component';
 
 @NgModule({
-  declarations: [AngularDatatableAdvancedComponent],
+  declarations: [AngularDatatableAdvancedComponent, FilterComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -23,7 +26,10 @@ import {MatIconModule} from '@angular/material/icon';
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatMenuModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatButtonModule
   ],
   exports: [AngularDatatableAdvancedComponent]
 })

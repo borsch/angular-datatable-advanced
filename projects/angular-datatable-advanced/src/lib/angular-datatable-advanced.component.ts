@@ -80,10 +80,6 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
     return this.columns.map(col => col.columnKey);
   }
 
-  openColumnFilter(column: Column) {
-    console.log(column);
-  }
-
   private loadPage(page, size) {
     this.loadingSubject.next(true);
     this.rowsSubject.next([]);

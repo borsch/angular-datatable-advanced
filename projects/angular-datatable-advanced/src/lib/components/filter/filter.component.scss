@@ -1,0 +1,8 @@
+::ng-deep .filter-menu {
+  width: 300px;
+}
+
+[mat-menu-item]:hover, [mat-menu-item]:active, [mat-menu-item] {
+  background: white;
+  cursor: default;
+}
