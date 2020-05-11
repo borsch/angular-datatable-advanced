@@ -12,6 +12,7 @@
     },
     "array-type": false,
     "arrow-return-shorthand": true,
+    "no-trailing-whitespace": false,
     "curly": true,
     "deprecation": {
       "severity": "warning"

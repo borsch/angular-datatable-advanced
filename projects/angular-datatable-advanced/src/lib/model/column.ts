@@ -3,4 +3,5 @@ export class Column {
   columnName: string;
   sortable?: boolean;
   filterable?: boolean;
+  cellRender?: (row: any) => string;
 }

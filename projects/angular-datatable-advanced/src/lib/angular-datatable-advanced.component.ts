@@ -6,7 +6,6 @@ import {asapScheduler, BehaviorSubject, Observable, of, scheduled} from 'rxjs';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {RowsLoader} from './model/models';
 import {Column} from './model/column';
-import {subscriptionLogsToBeFn} from 'rxjs/internal/testing/TestScheduler';
 
 @Component({
   selector: 'ada-table',
@@ -36,6 +35,8 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
   rowsLoader: RowsLoader;
 
   ngOnInit(): void {
+    this.validateColumns();
+
     const self = this;
     this.dataSource = new (class CustomDataSource implements DataSource<any> {
       connect(collectionViewer: CollectionViewer): Observable<any[] | ReadonlyArray<any>> {
@@ -59,6 +60,9 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
   }
 
   renderCell(row: any, column: Column) {
+    if (column.cellRender) {
+      return column.cellRender(row);
+    }
     return this.getValueRecursively(row, column.columnKey.split('.'));
   }
 
@@ -96,5 +100,11 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
         this.rowsSubject.next(result.rows);
         this.totalItems = result.totalItems;
       });
+  }
+
+  private validateColumns() {
+    if (!this.columns || this.columns.length < 1) {
+      throw new Error('[column] attribute is required');
+    }
   }
 }

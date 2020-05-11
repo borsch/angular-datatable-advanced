@@ -33,12 +33,12 @@ export class AppComponent {
       columnName: 'Geolocation type'
     }, {
       columnKey: 'geolocation.coordinates',
-      columnName: 'Coordinates'
+      columnName: 'Coordinates',
+      cellRender: (row) => `LNG: ${row.geolocation.coordinates[0]}, LAT: ${row.geolocation.coordinates[1]}`
     }
   ];
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   public booksLoader(): RowsLoader {
     return (requestParams) => {
