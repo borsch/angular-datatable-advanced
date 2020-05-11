@@ -14,11 +14,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "mock-backend": "json-server --watch ./mock-backend/data.json --port 3000"
+    "mock-backend": "json-server --watch ./mock-backend/data.json --port 3000",
+    "release-lib": "bash ./scripts/release.sh"
   },
   "dependencies": {
     "@angular/animations": "~9.1.6",
