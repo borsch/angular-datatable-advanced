@@ -8,6 +8,8 @@ import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [AngularDatatableAdvancedComponent],
@@ -15,6 +17,8 @@ import { MatCardModule } from '@angular/material/card';
     BrowserModule,
     BrowserAnimationsModule,
     MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,

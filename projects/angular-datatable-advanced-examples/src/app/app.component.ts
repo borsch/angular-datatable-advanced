@@ -13,19 +13,23 @@ export class AppComponent {
 
   columns: Column[] = [
     {
-      columnKey: 'Title',
-      columnName: 'Title header',
+      columnKey: 'id',
+      columnName: '#',
       sortable: true,
       filterable: true
     }, {
-      columnKey: 'Year',
-      columnName: 'Year header',
+      columnKey: 'name',
+      columnName: 'Name',
       sortable: true,
       filterable: true
-    }
-    , {
-      columnKey: 'Released',
-      columnName: 'Released header',
+    }, {
+      columnKey: 'nametype',
+      columnName: 'Name type',
+      sortable: false,
+      filterable: false
+    }, {
+      columnKey: 'recclass',
+      columnName: 'Record class',
       sortable: false,
       filterable: false
     }
@@ -36,7 +40,7 @@ export class AppComponent {
 
   public booksLoader(): RowsLoader {
     return (requestParams) => {
-      return this.http.get('http://localhost:3000/films', {
+      return this.http.get('http://localhost:3000/data', {
         params: new HttpParams()
           .set('_start', (requestParams.page * requestParams.size).toString())
           .set('_end', (requestParams.page * requestParams.size + requestParams.size).toString())
@@ -45,7 +49,7 @@ export class AppComponent {
           const array = result as Array<any>;
           return {
             rows: array,
-            totalItems: 16
+            totalItems: 1000
           };
         }));
     };

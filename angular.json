@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/angular-datatable-advanced",
       "sourceRoot": "projects/angular-datatable-advanced/src",
-      "prefix": "lib",
+      "prefix": "ada",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

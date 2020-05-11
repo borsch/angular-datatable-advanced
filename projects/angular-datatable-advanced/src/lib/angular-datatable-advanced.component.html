@@ -1,7 +1,11 @@
 <div>
   <mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let column of columns" matColumnDef="{{column.columnKey}}">
-      <mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!column.sortable">{{column.columnName}}</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        {{column.columnName}}
+        <span class="filter-icon" style="cursor: pointer;" (click)="openColumnFilter(column)"><mat-icon>keyboard_arrow_down</mat-icon></span>
+        <span mat-sort-header [disabled]="!column.sortable"></span>
+      </mat-header-cell>
       <mat-cell *matCellDef="let row">{{renderCell(row, column)}}</mat-cell>
     </ng-container>
 

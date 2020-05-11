@@ -8,7 +8,7 @@ import {RowsLoader} from './model/models';
 import {Column} from './model/column';
 
 @Component({
-  selector: 'lib-angular-datatable-advanced',
+  selector: 'ada-table',
   templateUrl: './angular-datatable-advanced.component.html',
   styleUrls: ['./angular-datatable-advanced.component.scss']
 })
@@ -63,6 +63,10 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
 
   getColumns() {
     return this.columns.map(col => col.columnKey);
+  }
+
+  openColumnFilter(column: Column) {
+    console.log(column);
   }
 
   private loadPage(page, size) {
