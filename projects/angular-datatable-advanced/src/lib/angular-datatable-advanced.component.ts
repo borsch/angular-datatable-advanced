@@ -5,7 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {asapScheduler, BehaviorSubject, Observable, of, scheduled} from 'rxjs';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {RowsLoader} from './model/models';
-import {Column} from './model/column';
+import {Column, ExtendedColumn} from './model/column';
 
 @Component({
   selector: 'ada-table',
@@ -17,6 +17,7 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
   private rowsSubject = new BehaviorSubject<Array<any>>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
+  extendedColumns: ExtendedColumn[];
   dataSource: DataSource<any>;
   loading$ = this.loadingSubject.asObservable();
   totalItems = 0;
@@ -36,6 +37,7 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
 
   ngOnInit(): void {
     this.validateColumns();
+    this.buildColumns();
 
     const self = this;
     this.dataSource = new (class CustomDataSource implements DataSource<any> {
@@ -77,7 +79,7 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
   }
 
   getColumns() {
-    return this.columns.map(col => col.columnKey);
+    return this.extendedColumns.map(col => col.id);
   }
 
   private loadPage(page, size) {
@@ -102,5 +104,14 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
     if (!this.columns || this.columns.length < 1) {
       throw new Error('[column] attribute is required');
     }
+  }
+
+  private buildColumns() {
+    this.extendedColumns = this.columns.map(col => {
+      return {
+        column: col,
+        id: `${(col.columnKey || 'none')}-${Math.random()}`
+      };
+    });
   }
 }

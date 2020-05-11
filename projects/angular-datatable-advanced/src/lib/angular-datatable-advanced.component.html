@@ -1,12 +1,12 @@
 <div>
   <mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
-    <ng-container *ngFor="let column of columns" matColumnDef="{{column.columnKey}}">
+    <ng-container *ngFor="let column of extendedColumns" matColumnDef="{{column.id}}">
       <mat-header-cell *matHeaderCellDef>
-        {{column.columnName}}
-        <span mat-sort-header [disabled]="!column.sortable"></span>
-        <ada-filter *ngIf="column.filterable"></ada-filter>
+        {{column.column.columnName}}
+        <span mat-sort-header [disabled]="!column.column.sortable"></span>
+        <ada-filter *ngIf="column.column.filterable"></ada-filter>
       </mat-header-cell>
-      <mat-cell *matCellDef="let row">{{renderCell(row, column)}}</mat-cell>
+      <mat-cell *matCellDef="let row">{{renderCell(row, column.column)}}</mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="getColumns()"></mat-header-row>
