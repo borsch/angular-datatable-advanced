@@ -63,17 +63,8 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
 
     this.filterUpdateSubject.subscribe(updatedColumn => {
       if (updatedColumn) {
-        const filters = this.extendedColumns
-          .filter(column => !!column.filter)
-          .map(column => {
-            return {
-              column: column.column,
-              filter: column.filter
-            } as ColumnWithFilter;
-          });
-
         this.paginator.pageIndex = 0;
-        this.loadPage(0, this.paginator.pageSize, filters);
+        this.loadPage(0, this.paginator.pageSize);
       }
     });
   }
@@ -103,11 +94,11 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
     return this.extendedColumns.map(col => col.id);
   }
 
-  private loadPage(page, size, filters: ColumnWithFilter[] = []) {
+  private loadPage(page, size) {
     this.loadingSubject.next(true);
     this.rowsSubject.next([]);
 
-    this.rowsLoader({page, size, filters})
+    this.rowsLoader({page, size, filters: this.buildFilters()})
       .pipe(
         catchError(() => of({
           rows: [],
@@ -134,5 +125,16 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
         id: `${(col.columnKey || 'none')}-${Math.random()}`
       };
     });
+  }
+
+  private buildFilters(): ColumnWithFilter[] {
+    return this.extendedColumns
+      .filter(column => !!column.filter)
+      .map(column => {
+        return {
+          column: column.column,
+          filter: column.filter
+        } as ColumnWithFilter;
+      });
   }
 }

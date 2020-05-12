@@ -43,6 +43,7 @@ export class AppComponent {
 
   public booksLoader(): RowsLoader {
     return (requestParams) => {
+      console.log('Run search with params: ', requestParams);
       return this.http.get('http://localhost:3000/data', {
         params: new HttpParams()
           .set('_start', (requestParams.page * requestParams.size).toString())
