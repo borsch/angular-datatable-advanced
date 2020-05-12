@@ -1,3 +1,5 @@
+import {Filter} from './filter';
+
 export class Column {
   columnKey?: string;
   columnName: string;
@@ -7,6 +9,7 @@ export class Column {
 }
 
 export class ExtendedColumn {
-  column: Column;
   id: string;
+  column: Column;
+  filter?: Filter;
 }

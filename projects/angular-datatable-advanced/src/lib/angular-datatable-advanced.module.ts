@@ -13,12 +13,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import {FilterComponent} from './components/filter/filter.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [AngularDatatableAdvancedComponent, FilterComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,

@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {catchError, finalize, mergeAll, tap} from 'rxjs/operators';
 import {MatSort} from '@angular/material/sort';
 import {asapScheduler, BehaviorSubject, Observable, of, scheduled} from 'rxjs';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
-import {RowsLoader} from './model/models';
+import {ColumnWithFilter, RowsLoader} from './model/models';
 import {Column, ExtendedColumn} from './model/column';
 
 @Component({
@@ -12,11 +12,12 @@ import {Column, ExtendedColumn} from './model/column';
   templateUrl: './angular-datatable-advanced.component.html',
   styleUrls: ['./angular-datatable-advanced.component.scss']
 })
-export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit {
+export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private rowsSubject = new BehaviorSubject<Array<any>>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
 
+  filterUpdateSubject = new BehaviorSubject<ExtendedColumn>(null);
   extendedColumns: ExtendedColumn[];
   dataSource: DataSource<any>;
   loading$ = this.loadingSubject.asObservable();
@@ -59,6 +60,26 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
       .pipe(mergeAll())
       .pipe(tap(() => this.loadPage(this.paginator.pageIndex, this.paginator.pageSize)))
       .subscribe();
+
+    this.filterUpdateSubject.subscribe(updatedColumn => {
+      if (updatedColumn) {
+        const filters = this.extendedColumns
+          .filter(column => !!column.filter)
+          .map(column => {
+            return {
+              column: column.column,
+              filter: column.filter
+            } as ColumnWithFilter;
+          });
+
+        this.paginator.pageIndex = 0;
+        this.loadPage(0, this.paginator.pageSize, filters);
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.filterUpdateSubject.complete();
   }
 
   renderCell(row: any, column: Column) {
@@ -82,11 +103,11 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit 
     return this.extendedColumns.map(col => col.id);
   }
 
-  private loadPage(page, size) {
+  private loadPage(page, size, filters: ColumnWithFilter[] = []) {
     this.loadingSubject.next(true);
     this.rowsSubject.next([]);
 
-    this.rowsLoader({page, size})
+    this.rowsLoader({page, size, filters})
       .pipe(
         catchError(() => of({
           rows: [],
