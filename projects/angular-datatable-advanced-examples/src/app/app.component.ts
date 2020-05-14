@@ -33,7 +33,9 @@ export class AppComponent {
       columnName: 'Geolocation type'
     }, {
       columnName: 'Coordinates',
-      cellRender: (row) => `LNG: ${row.geolocation.coordinates[0]}, LAT: ${row.geolocation.coordinates[1]}`,
+      cellRender: (row) => row.geolocation && row.geolocation.coordinates
+        ? `LNG: ${row.geolocation.coordinates[0]}, LAT: ${row.geolocation.coordinates[1]}`
+        : '-',
       sortable: true,
       filterable: true
     }
@@ -44,10 +46,18 @@ export class AppComponent {
   public booksLoader(): RowsLoader {
     return (requestParams) => {
       console.log('Run search with params: ', requestParams);
+
+      let httpParams = new HttpParams()
+        .set('_start', (requestParams.page * requestParams.size).toString())
+        .set('_end', (requestParams.page * requestParams.size + requestParams.size).toString());
+      if (requestParams.sort) {
+        httpParams = httpParams
+          .set('_sort', requestParams.sort.column.columnKey)
+          .set('_order', requestParams.sort.direction);
+      }
+
       return this.http.get('http://localhost:3000/data', {
-        params: new HttpParams()
-          .set('_start', (requestParams.page * requestParams.size).toString())
-          .set('_end', (requestParams.page * requestParams.size + requestParams.size).toString())
+        params: httpParams
       })
         .pipe(map(result => {
           const array = result as Array<any>;

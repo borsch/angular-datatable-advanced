@@ -4,7 +4,7 @@ import {catchError, finalize, mergeAll, tap} from 'rxjs/operators';
 import {MatSort} from '@angular/material/sort';
 import {asapScheduler, BehaviorSubject, Observable, of, scheduled} from 'rxjs';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
-import {ColumnWithFilter, RowsLoader} from './model/models';
+import {ColumnWithFilter, RowsLoader, Sort} from './model/models';
 import {Column, ExtendedColumn} from './model/column';
 
 @Component({
@@ -98,7 +98,7 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
     this.loadingSubject.next(true);
     this.rowsSubject.next([]);
 
-    this.rowsLoader({page, size, filters: this.buildFilters()})
+    this.rowsLoader({page, size, filters: this.buildFilters(), sort: this.getSortField()})
       .pipe(
         catchError(() => of({
           rows: [],
@@ -110,6 +110,27 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
         this.rowsSubject.next(result.rows);
         this.totalItems = result.totalItems;
       });
+  }
+
+  private getSortField(): Sort | null {
+    let activeSortField: Sort = null;
+
+    if (this.sort) {
+      const sortDirection = this.sort['_direction'];
+      if (sortDirection) {
+        const columnId = this.sort.active;
+
+        this.extendedColumns
+          .filter(column => column.id === columnId)
+          .map(column => column.column)
+          .forEach(column => activeSortField = {
+            column,
+            direction: sortDirection
+          });
+      }
+    }
+
+    return activeSortField;
   }
 
   private validateColumns() {

@@ -6,6 +6,7 @@ export interface RequestParams {
   page: number;
   size: number;
   filters: ColumnWithFilter[];
+  sort?: Sort;
 }
 
 export interface ColumnWithFilter {
@@ -16,6 +17,11 @@ export interface ColumnWithFilter {
 export interface LoadResult {
   rows: Array<any>;
   totalItems: number;
+}
+
+export interface Sort {
+  direction: string;
+  column: Column;
 }
 
 export type RowsLoader = (parameters: RequestParams) => Observable<LoadResult>;
