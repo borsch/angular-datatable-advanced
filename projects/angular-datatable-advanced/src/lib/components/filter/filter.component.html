@@ -2,9 +2,9 @@
   <mat-icon [matMenuTriggerFor]="menu">search</mat-icon>
   <mat-menu #menu="matMenu" class="filter-menu">
     <div mat-menu-item (click)="ignoreMenuClick($event);">
-      <mat-form-field>
+      <mat-form-field style="width: 100%;">
         <mat-label>Filter type</mat-label>
-        <select matNativeControl [(ngModel)]="filterType">
+        <select class="ada-filter-select" matNativeControl [(ngModel)]="filterType">
           <option value="CONTAINS">Contains</option>
           <option value="STARTS_WITH">Starts with</option>
           <option value="ENDS_WITH">Ends with</option>
@@ -16,11 +16,11 @@
       </mat-form-field>
     </div>
     <div mat-menu-item (click)="ignoreMenuClick($event);">
-      <input matInput placeholder="Filter" [(ngModel)]="filter1">
+      <input matInput class="ada-filter-input" placeholder="Filter" [(ngModel)]="filter1">
     </div>
-    <div mat-menu-item>
-      <button (click)="applyFilter()">Apply filter</button>
-      <button (click)="clearFilter()">Clear filter</button>
+    <div mat-menu-item style="text-align: center;">
+      <button mat-button class="ada-filter-button ada-apply-button" (click)="applyFilter()">Apply filter</button>
+      <button mat-button class="ada-filter-button ada-clear-button" (click)="clearFilter()">Clear filter</button>
     </div>
   </mat-menu>
 </div>

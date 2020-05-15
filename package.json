@@ -19,6 +19,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "mock-backend": "json-server --watch ./mock-backend/data.json --port 3000",
+    "start-example": "ng serve angular-datatable-advanced-examples --open",
     "release-lib": "bash ./scripts/release.sh"
   },
   "dependencies": {
