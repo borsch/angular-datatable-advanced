@@ -1,16 +1,16 @@
 <div>
-  <mat-table class="mat-elevation-z8" [dataSource]="dataSource" matSort>
-    <ng-container *ngFor="let column of extendedColumns" matColumnDef="{{column.id}}">
-      <mat-header-cell *matHeaderCellDef>
+  <mat-table class="ada-table" [dataSource]="dataSource" matSort>
+    <ng-container *ngFor="let column of extendedColumns" [matColumnDef]="column.id">
+      <mat-header-cell class="ada-th" *matHeaderCellDef>
         {{column.column.columnName}}
-        <span mat-sort-header [disabled]="!column.column.sortable"></span>
+        <span mat-sort-header class="ada-sort" [disabled]="!column.column.sortable"></span>
         <ada-filter [column]="column" [filterUpdateSubject]="filterUpdateSubject" *ngIf="column.column.filterable"></ada-filter>
       </mat-header-cell>
-      <mat-cell *matCellDef="let row">{{renderCell(row, column.column)}}</mat-cell>
+      <mat-cell class="ada-td" *matCellDef="let row">{{renderCell(row, column.column)}}</mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="getColumns()"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: getColumns()"></mat-row>
+    <mat-header-row class="ada-header-row" *matHeaderRowDef="getColumns()"></mat-header-row>
+    <mat-row class="ada-row" *matRowDef="let row; columns: getColumns()"></mat-row>
   </mat-table>
 
   <mat-card *ngIf="loading$ | async" style="display: flex; justify-content: center; align-items: center">

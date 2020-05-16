@@ -1,4 +1,4 @@
-<div class="filter-icon">
+<span class="filter-icon">
   <mat-icon [matMenuTriggerFor]="menu">search</mat-icon>
   <mat-menu #menu="matMenu" class="filter-menu">
     <div mat-menu-item (click)="ignoreMenuClick($event);">
@@ -23,4 +23,4 @@
       <button mat-button class="ada-filter-button ada-clear-button" (click)="clearFilter()">Clear filter</button>
     </div>
   </mat-menu>
-</div>
+</span>
