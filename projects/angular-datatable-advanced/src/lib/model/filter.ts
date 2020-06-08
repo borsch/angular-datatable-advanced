@@ -5,7 +5,7 @@ export enum FilterType {
   EQUALS = 'EQUALS',
   NOT_EQUALS = 'NOT_EQUALS',
   // IN = 'IN',
-  // RANGE = 'RANGE'
+  RANGE = 'RANGE'
 }
 
 export class Filter {

@@ -17,6 +17,7 @@ export class FilterComponent {
 
   filterType: FilterType = FilterType.EQUALS;
   filter1: any;
+  filter2: any;
 
   applyFilter() {
     this.column.filter = {
@@ -24,12 +25,17 @@ export class FilterComponent {
       value1: this.filter1
     };
 
+    if (this.filterType === FilterType.RANGE) {
+      this.column.filter.value2 = this.filter2;
+    }
+
     this.filterUpdateSubject.next(this.column);
   }
 
   clearFilter() {
     delete this.column.filter;
-    this.filter1 = '';
+    this.filter1 = null;
+    this.filter2 = null;
     this.filterUpdateSubject.next(this.column);
   }
 

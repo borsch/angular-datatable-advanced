@@ -11,12 +11,15 @@
           <option value="EQUALS">Equals</option>
           <option value="NOT_EQUALS">Not equals</option>
 <!--          <option value="IN">In</option>-->
-<!--          <option value="RANGE">Range</option>-->
+          <option value="RANGE">Range</option>
         </select>
       </mat-form-field>
     </div>
     <div mat-menu-item (click)="ignoreMenuClick($event);">
-      <input matInput class="ada-filter-input" placeholder="Filter" [(ngModel)]="filter1">
+      <input matInput class="ada-filter-input" placeholder="{{filterType === 'RANGE' ? 'From' : 'Filter'}}" [(ngModel)]="filter1">
+    </div>
+    <div mat-menu-item *ngIf="filterType === 'RANGE'" (click)="ignoreMenuClick($event);">
+      <input matInput class="ada-filter-input" placeholder="To" [(ngModel)]="filter2">
     </div>
     <div mat-menu-item style="text-align: center;">
       <button mat-button class="ada-filter-button ada-apply-button" (click)="applyFilter()">Apply filter</button>
