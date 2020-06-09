@@ -24,7 +24,12 @@ export class AppComponent {
       filterable: true
     }, {
       columnKey: 'nametype',
-      columnName: 'Name type'
+      columnName: 'Name type',
+      filterable: true,
+      filterIn: [
+        { value: 'valid', label: 'Valid' },
+        { value: 'invalid', label: 'Invalid' }
+      ]
     }, {
       columnKey: 'recclass',
       columnName: 'Record class'

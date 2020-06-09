@@ -5,20 +5,27 @@
       <mat-form-field style="width: 100%;">
         <mat-label>Filter type</mat-label>
         <select class="ada-filter-select" matNativeControl [(ngModel)]="filterType">
-          <option value="CONTAINS">Contains</option>
-          <option value="STARTS_WITH">Starts with</option>
-          <option value="ENDS_WITH">Ends with</option>
+          <option value="CONTAINS" *ngIf="!hasSetSelect()">Contains</option>
+          <option value="STARTS_WITH" *ngIf="!hasSetSelect()">Starts with</option>
+          <option value="ENDS_WITH" *ngIf="!hasSetSelect()">Ends with</option>
           <option value="EQUALS">Equals</option>
           <option value="NOT_EQUALS">Not equals</option>
-<!--          <option value="IN">In</option>-->
-          <option value="RANGE">Range</option>
+          <option value="IN" *ngIf="hasSetSelect()">In</option>
+          <option value="NIN" *ngIf="hasSetSelect()">Not in</option>
+          <option value="RANGE" *ngIf="!hasSetSelect()">Range</option>
         </select>
       </mat-form-field>
     </div>
-    <div mat-menu-item (click)="ignoreMenuClick($event);">
+    <div mat-menu-item (click)="ignoreMenuClick($event);" *ngIf="hasSetSelect()" class="filter-in-wrapper">
+      <div *ngFor="let check of filterIn">
+        <input type="checkbox" [checked]="filter3.indexOf(check.value) > -1" (change)="checkboxChange(check.value, $event)">
+        <span class="ml-md-2">{{check.label}}</span>
+      </div>
+    </div>
+    <div mat-menu-item (click)="ignoreMenuClick($event);" *ngIf="!hasSetSelect()">
       <input matInput class="ada-filter-input" placeholder="{{filterType === 'RANGE' ? 'From' : 'Filter'}}" [(ngModel)]="filter1">
     </div>
-    <div mat-menu-item *ngIf="filterType === 'RANGE'" (click)="ignoreMenuClick($event);">
+    <div mat-menu-item *ngIf="filterType === 'RANGE' && !hasSetSelect()" (click)="ignoreMenuClick($event);">
       <input matInput class="ada-filter-input" placeholder="To" [(ngModel)]="filter2">
     </div>
     <div mat-menu-item style="text-align: center;">

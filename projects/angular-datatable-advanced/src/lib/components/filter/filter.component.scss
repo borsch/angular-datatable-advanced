@@ -10,3 +10,8 @@
 .filter-icon > mat-icon {
   cursor: pointer;
 }
+
+.filter-in-wrapper {
+  height: 200px;
+  overflow-y: auto;
+}

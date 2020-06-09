@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {ExtendedColumn} from '../../model/column';
 import {FilterType} from '../../model/filter';
 import {BehaviorSubject} from 'rxjs';
+import {FilterIn} from '../../model/filter-in';
 
 @Component({
   selector: 'ada-filter',
@@ -14,19 +15,32 @@ export class FilterComponent {
   column: ExtendedColumn;
   @Input()
   filterUpdateSubject: BehaviorSubject<ExtendedColumn>;
+  @Input()
+  filterIn: Array<FilterIn> = [];
 
   filterType: FilterType = FilterType.EQUALS;
+  // default filter
   filter1: any;
+  // additional filter for range select
   filter2: any;
+  // filter of IN result
+  filter3: Array<any> = [];
 
   applyFilter() {
-    this.column.filter = {
-      type: this.filterType,
-      value1: this.filter1
-    };
+    if (this.hasSetSelect()) {
+      this.column.filter = {
+        type: this.filterType,
+        value1: this.filter3
+      };
+    } else {
+      this.column.filter = {
+        type: this.filterType,
+        value1: this.filter1
+      };
 
-    if (this.filterType === FilterType.RANGE) {
-      this.column.filter.value2 = this.filter2;
+      if (this.filterType === FilterType.RANGE) {
+        this.column.filter.value2 = this.filter2;
+      }
     }
 
     this.filterUpdateSubject.next(this.column);
@@ -36,11 +50,24 @@ export class FilterComponent {
     delete this.column.filter;
     this.filter1 = null;
     this.filter2 = null;
+    this.filter3 = [];
     this.filterUpdateSubject.next(this.column);
   }
 
   ignoreMenuClick($event){
     $event.stopPropagation();
+  }
+
+  hasSetSelect() {
+    return this.filterIn && this.filterIn.length > 0;
+  }
+
+  checkboxChange(value: any, e){
+    if (e.target.checked) {
+      this.filter3.push(value);
+    } else {
+      this.filter3.splice(this.filter3.indexOf(value));
+    }
   }
 
 }

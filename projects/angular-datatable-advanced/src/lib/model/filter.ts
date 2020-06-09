@@ -4,7 +4,8 @@ export enum FilterType {
   ENDS_WITH = 'ENDS_WITH',
   EQUALS = 'EQUALS',
   NOT_EQUALS = 'NOT_EQUALS',
-  // IN = 'IN',
+  IN = 'IN',
+  NIN = 'NIN',
   RANGE = 'RANGE'
 }
 
