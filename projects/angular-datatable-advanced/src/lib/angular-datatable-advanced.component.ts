@@ -6,6 +6,7 @@ import {asapScheduler, BehaviorSubject, Observable, of, scheduled} from 'rxjs';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import {ColumnWithFilter, RowsLoader, Sort} from './model/models';
 import {Column, ExtendedColumn} from './model/column';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'ada-table',
@@ -35,6 +36,9 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
   pageSizeOptions = [10, 20];
   @Input()
   rowsLoader: RowsLoader;
+
+  constructor(private sanitizer: DomSanitizer) {
+  }
 
   ngOnInit(): void {
     this.validateColumns();
@@ -75,7 +79,7 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
 
   renderCell(row: any, column: Column) {
     if (column.cellRender) {
-      return column.cellRender(row);
+      return this.sanitizer.bypassSecurityTrustHtml(column.cellRender(row));
     }
     return this.getValueRecursively(row, column.columnKey.split('.'));
   }

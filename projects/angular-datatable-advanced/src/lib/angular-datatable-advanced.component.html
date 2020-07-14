@@ -6,7 +6,7 @@
         <span mat-sort-header class="ada-sort" [disabled]="!column.column.sortable"></span>
         <ada-filter [column]="column" [filterUpdateSubject]="filterUpdateSubject" [filterIn]="column.column.filterIn" *ngIf="column.column.filterable"></ada-filter>
       </mat-header-cell>
-      <mat-cell class="ada-td" *matCellDef="let row">{{renderCell(row, column.column)}}</mat-cell>
+      <mat-cell class="ada-td" *matCellDef="let row" [innerHTML]="renderCell(row, column.column)"></mat-cell>
     </ng-container>
 
     <mat-header-row class="ada-header-row" *matHeaderRowDef="getColumns()"></mat-header-row>
