@@ -3,6 +3,8 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {RowsLoader} from '../../../angular-datatable-advanced/src/lib/model/models';
 import {Column} from '../../../angular-datatable-advanced/src/lib/model/column';
+import {FilterIn} from '../../../angular-datatable-advanced/src/lib/model/filter-in';
+import {of} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +34,9 @@ export class AppComponent {
       ]
     }, {
       columnKey: 'recclass',
-      columnName: 'Record class'
+      columnName: 'Record class',
+      filterable: true,
+      filterInPromise: this.loadRecordClass()
     }, {
       columnKey: 'geolocation.type',
       columnName: 'Geolocation type'
@@ -72,5 +76,21 @@ export class AppComponent {
           };
         }));
     };
+  }
+
+  private loadRecordClass(): Promise<Array<FilterIn>> {
+    return of([
+      {
+        value: 'L5',
+        label: 'L5 label'
+      }, {
+        value: 'H6',
+        label: 'H6 label'
+      }, {
+        value: 'Other',
+        label: 'Other label'
+      }
+    ])
+      .toPromise();
   }
 }

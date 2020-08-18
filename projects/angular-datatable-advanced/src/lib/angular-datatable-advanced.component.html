@@ -4,7 +4,7 @@
       <mat-header-cell class="ada-th" *matHeaderCellDef>
         {{column.column.columnName}}
         <span mat-sort-header class="ada-sort" [disabled]="!column.column.sortable"></span>
-        <ada-filter [column]="column" [filterUpdateSubject]="filterUpdateSubject" [filterIn]="column.column.filterIn" *ngIf="column.column.filterable"></ada-filter>
+        <ada-filter [column]="column" [filterUpdateSubject]="filterUpdateSubject" *ngIf="column.column.filterable"></ada-filter>
       </mat-header-cell>
       <mat-cell class="ada-td" *matCellDef="let row" [innerHTML]="renderCell(row, column.column)"></mat-cell>
     </ng-container>

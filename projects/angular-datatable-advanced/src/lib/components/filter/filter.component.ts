@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ExtendedColumn} from '../../model/column';
 import {FilterType} from '../../model/filter';
 import {BehaviorSubject} from 'rxjs';
@@ -9,15 +9,14 @@ import {FilterIn} from '../../model/filter-in';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent {
+export class FilterComponent implements OnInit {
 
   @Input()
   column: ExtendedColumn;
   @Input()
   filterUpdateSubject: BehaviorSubject<ExtendedColumn>;
-  @Input()
-  filterIn: Array<FilterIn> = [];
 
+  filterIn: Array<FilterIn> = [];
   filterType: FilterType = FilterType.EQUALS;
   // default filter
   filter1: any;
@@ -25,6 +24,15 @@ export class FilterComponent {
   filter2: any;
   // filter of IN result
   filter3: Array<any> = [];
+
+  ngOnInit(): void {
+    if (this.column.column.filterIn) {
+      this.filterIn = this.column.column.filterIn;
+    } else if (this.column.column.filterInPromise) {
+      this.column.column.filterInPromise
+        .then(result => this.filterIn = result || []);
+    }
+  }
 
   applyFilter() {
     if (this.hasSetSelect()) {

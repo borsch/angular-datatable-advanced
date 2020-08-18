@@ -8,6 +8,7 @@ export class Column {
   filterable?: boolean;
   cellRender?: (row: any) => string;
   filterIn?: Array<FilterIn> = [];
+  filterInPromise?: Promise<Array<FilterIn>> = null;
 }
 
 export class ExtendedColumn {
