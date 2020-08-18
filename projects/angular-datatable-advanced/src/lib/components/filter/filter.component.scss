@@ -1,5 +1,10 @@
+$filter-width: 250px;
+$input-field-diff: 6px;
+$input-filed-height: 28px;
+
 ::ng-deep .filter-menu {
-  width: 300px;
+  width: $filter-width;
+  padding: 5px;
 }
 
 [mat-menu-item]:hover, [mat-menu-item]:active, [mat-menu-item] {
@@ -11,7 +16,18 @@
   cursor: pointer;
 }
 
-.filter-in-wrapper {
-  height: 200px;
-  overflow-y: auto;
+.ada-filter-block {
+  margin-bottom: 4px;
+}
+
+.ada-filter-input {
+  width: $filter-width;
+  height: $input-filed-height;
+}
+
+input[type=text].ada-filter-input {
+  height: $input-filed-height - $input-field-diff;
+  line-height: $input-filed-height - $input-field-diff;
+  padding: 2px;
+  width: $filter-width - $input-field-diff;
 }
