@@ -98,6 +98,14 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
     return this.extendedColumns.map(col => col.id);
   }
 
+  /**
+   * Method that can be called outside to trigger content loading
+   */
+  reloadToFirstPage() {
+    this.paginator.pageIndex = 0;
+    this.loadPage(0, this.paginator.pageSize);
+  }
+
   private loadPage(page, size) {
     this.loadingSubject.next(true);
     this.rowsSubject.next([]);
