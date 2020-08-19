@@ -16,7 +16,6 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AngularDatatableAdvancedModule,
     AngularDatatableAdvancedModule
   ],
   providers: [],

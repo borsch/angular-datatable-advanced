@@ -1,33 +1,31 @@
-$filter-width: 250px;
-$input-field-diff: 6px;
+$filter-width: 260px;
 $input-filed-height: 28px;
 
 ::ng-deep .filter-menu {
-  width: $filter-width;
+  width: $filter-width + 10px;
   padding: 5px;
-}
 
-[mat-menu-item]:hover, [mat-menu-item]:active, [mat-menu-item] {
-  background: white;
-  cursor: default;
+  button {
+    border-radius: revert;
+  }
+
+  .ada-filter-block {
+    margin-bottom: 4px;
+  }
+
+  .ada-filter-input {
+    width: $filter-width;
+    height: $input-filed-height;
+  }
+
+  input[type=text].ada-filter-input {
+    height: $input-filed-height;
+    line-height: $input-filed-height;
+    padding: 2px;
+    width: $filter-width;
+  }
 }
 
 .filter-icon > mat-icon {
   cursor: pointer;
-}
-
-.ada-filter-block {
-  margin-bottom: 4px;
-}
-
-.ada-filter-input {
-  width: $filter-width;
-  height: $input-filed-height;
-}
-
-input[type=text].ada-filter-input {
-  height: $input-filed-height - $input-field-diff;
-  line-height: $input-filed-height - $input-field-diff;
-  padding: 2px;
-  width: $filter-width - $input-field-diff;
 }
