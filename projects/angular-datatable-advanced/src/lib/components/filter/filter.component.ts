@@ -32,6 +32,7 @@ export class FilterComponent implements OnInit {
       this.filterIn = this.column.column.filterIn;
     } else if (this.column.column.filterInPromise) {
       this.column.column.filterInPromise
+        .toPromise()
         .then(result => this.filterIn = result || []);
     }
   }

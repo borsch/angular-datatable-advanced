@@ -4,7 +4,7 @@ import {map} from 'rxjs/operators';
 import {RowsLoader} from '../../../angular-datatable-advanced/src/lib/model/models';
 import {Column} from '../../../angular-datatable-advanced/src/lib/model/column';
 import {FilterIn} from '../../../angular-datatable-advanced/src/lib/model/filter-in';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -78,7 +78,7 @@ export class AppComponent {
     };
   }
 
-  private loadRecordClass(): Promise<Array<FilterIn>> {
+  private loadRecordClass(): Observable<Array<FilterIn>> {
     return of([
       {
         value: 'L5',
@@ -90,7 +90,6 @@ export class AppComponent {
         value: 'Other',
         label: 'Other label'
       }
-    ])
-      .toPromise();
+    ]);
   }
 }

@@ -1,5 +1,6 @@
 import {Filter} from './filter';
 import {FilterIn} from './filter-in';
+import {Observable} from 'rxjs';
 
 export class Column {
   columnKey?: string;
@@ -8,7 +9,7 @@ export class Column {
   filterable?: boolean;
   cellRender?: (row: any) => string;
   filterIn?: Array<FilterIn> = [];
-  filterInPromise?: Promise<Array<FilterIn>> = null;
+  filterInPromise?: Observable<Array<FilterIn>> = null;
 }
 
 export class ExtendedColumn {
