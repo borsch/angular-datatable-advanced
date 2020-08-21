@@ -15,9 +15,12 @@
       </select>
     </div>
     <div (click)="ignoreMenuClick($event);" *ngIf="hasSetSelect()" class="ada-filter-block">
-      <div *ngFor="let check of filterIn">
-        <input type="checkbox" [checked]="filter3.indexOf(check.value) > -1" (change)="checkboxChange(check.value, $event)">
-        <span class="ml-md-2">{{check.label}}</span>
+      <input type="text" class="ada-filter-input ada-filter-input-small" placeholder="Filter out options" [(ngModel)]="filterOutSelect">
+      <div class="ada-filter-select-block">
+        <div *ngFor="let check of filterIn | filter:filterOutSelect">
+          <input type="checkbox" [checked]="filter3.indexOf(check.value) > -1" (change)="checkboxChange(check.value, $event)">
+          <span class="ml-md-2">{{check.label}}</span>
+        </div>
       </div>
     </div>
     <div (click)="ignoreMenuClick($event);" *ngIf="!hasSetSelect()" class="ada-filter-block">

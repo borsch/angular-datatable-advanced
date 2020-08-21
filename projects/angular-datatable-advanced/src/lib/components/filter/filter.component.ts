@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {ExtendedColumn} from '../../model/column';
 import {FilterType} from '../../model/filter';
 import {BehaviorSubject} from 'rxjs';
@@ -24,6 +24,8 @@ export class FilterComponent implements OnInit {
   filter2: any;
   // filter of IN result
   filter3: Array<any> = [];
+
+  filterOutSelect = null;
 
   ngOnInit(): void {
     if (this.column.column.filterIn) {
@@ -78,4 +80,19 @@ export class FilterComponent implements OnInit {
     }
   }
 
+}
+
+@Pipe({
+  name: 'filter',
+  pure: false
+})
+export class FilterSelectByKeyword implements PipeTransform {
+  transform(items: Array<FilterIn>, arg: string): Array<FilterIn> {
+    if (!items || !arg) {
+      return items;
+    }
+
+    arg = arg.toLowerCase();
+    return items.filter(item => item.label.toLowerCase().indexOf(arg) !== -1 || item.value.toLowerCase().indexOf(arg) !== -1);
+  }
 }

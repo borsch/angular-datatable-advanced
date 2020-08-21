@@ -18,6 +18,17 @@ $input-filed-height: 28px;
     height: $input-filed-height;
   }
 
+  .ada-filter-input-small {
+    height: $input-filed-height - 5px;
+  }
+
+  .ada-filter-select-block {
+    margin-bottom: 3px;
+    margin-top: 5px;
+    max-height: 170px;
+    overflow-y: auto;
+  }
+
   input[type=text].ada-filter-input {
     height: $input-filed-height;
     line-height: $input-filed-height;

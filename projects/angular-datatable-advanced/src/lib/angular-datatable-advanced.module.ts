@@ -9,11 +9,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import {FilterComponent} from './components/filter/filter.component';
+import {FilterComponent, FilterSelectByKeyword} from './components/filter/filter.component';
 import {FormsModule} from '@angular/forms';
 
 @NgModule({
-  declarations: [AngularDatatableAdvancedComponent, FilterComponent],
+  declarations: [AngularDatatableAdvancedComponent, FilterComponent, FilterSelectByKeyword],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
