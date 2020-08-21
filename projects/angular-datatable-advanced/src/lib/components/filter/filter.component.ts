@@ -94,6 +94,10 @@ export class FilterSelectByKeyword implements PipeTransform {
     }
 
     arg = arg.toLowerCase();
-    return items.filter(item => item.label.toLowerCase().indexOf(arg) !== -1 || item.value.toLowerCase().indexOf(arg) !== -1);
+    return items.filter(item => toLowerString(item.label).indexOf(arg) !== -1 || toLowerString(item.value).indexOf(arg) !== -1);
   }
+}
+
+function toLowerString(o: any): string {
+  return o.toString().toLowerCase();
 }
