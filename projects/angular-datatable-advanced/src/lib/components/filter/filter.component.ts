@@ -30,10 +30,14 @@ export class FilterComponent implements OnInit {
   ngOnInit(): void {
     if (this.column.column.filterIn) {
       this.filterIn = this.column.column.filterIn;
+      this.filterType = FilterType.IN;
     } else if (this.column.column.filterInPromise) {
       this.column.column.filterInPromise
         .toPromise()
-        .then(result => this.filterIn = result || []);
+        .then(result => {
+          this.filterIn = result || [];
+          this.filterType = FilterType.IN;
+        });
     }
   }
 
@@ -41,7 +45,7 @@ export class FilterComponent implements OnInit {
     if (this.hasSetSelect()) {
       this.column.filter = {
         type: this.filterType,
-        value1: this.filter3
+        value1: this.filter3.length ? this.filter3 : null
       };
     } else {
       this.column.filter = {
@@ -54,11 +58,15 @@ export class FilterComponent implements OnInit {
       }
     }
 
+    if (!this.column.filter.value1 && !this.column.filter.value2) {
+      this.column.filter = null;
+    }
+
     this.filterUpdateSubject.next(this.column);
   }
 
   clearFilter() {
-    delete this.column.filter;
+    this.column.filter = null;
     this.filter1 = null;
     this.filter2 = null;
     this.filter3 = [];

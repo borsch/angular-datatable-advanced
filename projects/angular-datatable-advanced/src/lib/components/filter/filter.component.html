@@ -7,11 +7,11 @@
         <option value="CONTAINS" *ngIf="!hasSetSelect()">Contains</option>
         <option value="STARTS_WITH" *ngIf="!hasSetSelect()">Starts with</option>
         <option value="ENDS_WITH" *ngIf="!hasSetSelect()">Ends with</option>
-        <option value="EQUALS">Equals</option>
-        <option value="NOT_EQUALS">Not equals</option>
+        <option value="EQUALS" *ngIf="!hasSetSelect()">Equals</option>
+        <option value="NOT_EQUALS" *ngIf="!hasSetSelect()">Not equals</option>
+        <option value="RANGE" *ngIf="!hasSetSelect()">Range</option>
         <option value="IN" *ngIf="hasSetSelect()">In</option>
         <option value="NIN" *ngIf="hasSetSelect()">Not in</option>
-        <option value="RANGE" *ngIf="!hasSetSelect()">Range</option>
       </select>
     </div>
     <div (click)="ignoreMenuClick($event);" *ngIf="hasSetSelect()" class="ada-filter-block">
