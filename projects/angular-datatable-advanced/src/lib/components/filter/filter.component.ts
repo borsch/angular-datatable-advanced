@@ -81,6 +81,10 @@ export class FilterComponent implements OnInit {
     return this.filterIn && this.filterIn.length > 0;
   }
 
+  hasDateTimeSelect(): boolean {
+    return !!this.column.column.filterDateOptions;
+  }
+
   checkboxChange(value: any, e){
     if (e.target.checked) {
       this.filter3.push(value);

@@ -1,6 +1,7 @@
 import {Filter} from './filter';
 import {FilterIn} from './filter-in';
 import {Observable} from 'rxjs';
+import {FlatpickrDefaultsInterface} from 'angularx-flatpickr/flatpickr-defaults.service';
 
 export class Column {
   columnKey?: string;
@@ -10,6 +11,7 @@ export class Column {
   cellRender?: (row: any) => string;
   filterIn?: Array<FilterIn> = [];
   filterInPromise?: Observable<Array<FilterIn>> = null;
+  filterDateOptions?: FlatpickrDefaultsInterface;
 }
 
 export class ExtendedColumn {

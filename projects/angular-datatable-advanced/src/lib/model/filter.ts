@@ -6,7 +6,11 @@ export enum FilterType {
   NOT_EQUALS = 'NOT_EQUALS',
   IN = 'IN',
   NIN = 'NIN',
-  RANGE = 'RANGE'
+  RANGE = 'RANGE',
+  GREATER_THAN = 'GREATER_THAN',
+  GREATER_THAN_OR_EQUALS = 'GREATER_THAN_OR_EQUALS',
+  LESS_THAN = 'LESS_THAN',
+  LESS_THAN_OR_EQUALS = 'LESS_THAN_OR_EQUALS'
 }
 
 export class Filter {

@@ -47,6 +47,26 @@ export class AppComponent {
         : '-',
       sortable: true,
       filterable: true
+    }, {
+      columnKey: 'test',
+      columnName: 'Test date time picker',
+      filterable: true,
+      filterDateOptions: {
+        enableTime: true,
+        time24hr: true,
+        altFormat: 'd/m/Y H:i',
+        dateFormat: 'Z',
+        altInput: true
+      }
+    }, {
+      columnKey: 'test',
+      columnName: 'Test date picker',
+      filterable: true,
+      filterDateOptions: {
+        altFormat: 'd/m/Y',
+        dateFormat: 'd/m/Y',
+        altInput: true
+      }
     }
   ];
 

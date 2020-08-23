@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {FilterComponent, FilterSelectByKeyword} from './components/filter/filter.component';
 import {FormsModule} from '@angular/forms';
+import {FlatpickrModule} from 'angularx-flatpickr';
 
 @NgModule({
   declarations: [AngularDatatableAdvancedComponent, FilterComponent, FilterSelectByKeyword],
@@ -18,6 +19,7 @@ import {FormsModule} from '@angular/forms';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    FlatpickrModule.forRoot(),
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
