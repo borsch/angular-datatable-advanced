@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "build": "ng build --prod --outputPath=../docs",
+    "build": "ng build --prod --outputPath=../docs --baseHref=https://borsch.github.io/angular-datatable-advanced/",
     "lint": "ng lint"
   },
   "private": true,
