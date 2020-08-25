@@ -1,9 +1,344 @@
-<div class="container">
-  <ada-table
-    [pageSize]="10"
-    [pageSizeOptions]="[10, 20]"
-    [columns]="columns"
-    [rowsLoader]="rowsLoader"
-  >
-  </ada-table>
+<div class="page-wrapper">
+
+  <header id="header" class="header">
+    <div class="container">
+      <div class="branding">
+        <h1 class="logo">
+          <span class="text-highlight">Angular Datatable Advanced</span>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <div class="doc-wrapper">
+    <div class="container">
+      <div class="doc-body row">
+        <div class="doc-content col-md-9 col-12 order-1">
+          <div class="content-inner">
+            <section id="about-section" class="doc-section">
+              <h2 class="section-title">About</h2>
+              <div class="section-block">
+                <div>
+                  Simple datatable with filtering, sorting and server-side data loading. Supports column-based
+                  configuration.
+                  Has few different filter types:
+                  <ul>
+                    <li>Text</li>
+                    <li>Filtering with multi-select. support filter loading via Observable</li>
+                    <li>Date & Date-Time picker. As picker <a href="https://flatpickr.js.org/"
+                                                              target="_blank">Flatpickr</a> is used with <a
+                      href="https://github.com/mattlewis92/angularx-flatpickr" target="_blank">angularx-flatpickr</a> as
+                      wrapper
+                    </li>
+                  </ul>
+                </div>
+                <a href="https://github.com/borsch/angular-datatable-advanced" class="btn btn-green" target="_blank">GitHub</a>
+              </div>
+            </section>
+
+            <section id="examples-section" class="doc-section">
+              <h2 class="section-title">Examples</h2>
+              <div id="simple-example" class="section-block">
+                <h3 class="block-title">Simple table example</h3>
+                <div>
+                  Table with example of:
+                  <ul>
+                    <li>Plain text column rendered by field name(first column)</li>
+                    <li>Column rendered with nested field(second column)</li>
+                    <li>Column rendered with custom cellRender function(third column)</li>
+                  </ul>
+                </div>
+                <div>
+                <ada-table
+                  [pageSize]="3"
+                  [pageSizeOptions]="[3, 5]"
+                  [columns]="minExampleColumns"
+                  [rowsLoader]="rowsLoader"
+                  ></ada-table>
+                </div>
+                <div>
+                  <a href="#" data-target="sample-code-example" class="spoiler-trigger"><span>Code example</span></a>
+                  <div id="sample-code-example" class="spoiler-block">
+                    <pre><code class="language-javascript">minExampleColumns: Column[] = [
+  &#123;
+    columnKey: 'plainTextFilter',
+    columnName: 'Plain Text filter',
+    sortable: true,
+    filterable: true
+  &#125;,
+  &#123;
+    columnKey: 'render.deep.field',
+    columnName: 'Render deep field',
+    sortable: true,
+    filterable: true
+  &#125;,
+  &#123;
+    columnKey: 'cellRenderExample',
+    columnName: 'Custom cellRender Example',
+    sortable: true,
+    filterable: true,
+    cellRender: row => 'render full object in single column: ' + JSON.stringify(row)
+  &#125;
+];</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div id="set-example" class="section-block">
+                <h3 class="block-title">Set filter example</h3>
+                <div>
+                  Table with example of:
+                  <ul>
+                    <li>Set filter with inline array of options(first column)</li>
+                    <li>Set filter with options loaded with Observable(second column)</li>
+                  </ul>
+                </div>
+                <div>
+                  <ada-table
+                    [pageSize]="3"
+                    [pageSizeOptions]="[3, 5]"
+                    [columns]="columnSetSelect"
+                    [rowsLoader]="rowsLoader"
+                  ></ada-table>
+                </div>
+                <div>
+                  <a href="#" data-target="set-code-example" class="spoiler-trigger"><span>Code example</span></a>
+                  <div id="set-code-example" class="spoiler-block">
+                    <pre><code class="language-javascript">import &#123;FilterIn&#125; from 'angular-datatable-advanced/lib/model/filter-in';
+
+columnSetSelect: Column[] = [
+  &#123;
+    columnKey: 'setFilter',
+    columnName: 'Set Filter',
+    filterable: true,
+    filterIn: [&#123;
+      value: 'value_1',
+      label: 'Readable label: value 1'
+    &#125;, &#123;
+      value: 'value_2',
+      label: 'Readable label: value 2'
+    &#125;]
+  &#125;, &#123;
+    columnKey: 'setFilterObservable',
+    columnName: 'Set filter with options from observable',
+    filterable: true,
+    filterInPromise: this.setFilterObservable()
+  &#123;
+];
+
+private setFilterObservable(): Observable&lt;Array&lt;FilterIn&gt;&gt; &#123;
+  // can be replaced with any http request
+  return of([
+    &#123;
+      value: 'observable_value_1',
+      label: 'Observable value 1 label'
+    &#125;, &#123;
+      value: 'observable_value_2',
+      label: 'Observable value 2 label'
+    &#125;
+  ]);
+&#125;</code></pre>
+                  </div>
+                </div>
+              </div>
+
+              <div id="date-time-example" class="section-block">
+                <h3 class="block-title">Date & Date-Time picker filter example</h3>
+                <div>
+                  Table with example of:
+                  <ul>
+                    <li>Filter by date-time(first column)</li>
+                    <li>Filter by date(second column)</li>
+                  </ul>
+                </div>
+                <div>
+                  <ada-table
+                    [pageSize]="3"
+                    [pageSizeOptions]="[3, 5]"
+                    [columns]="dateTimeColumns"
+                    [rowsLoader]="rowsLoader"
+                  ></ada-table>
+                </div>
+                <div>
+                  <a href="#" data-target="datetime-code-example" class="spoiler-trigger"><span>Code example</span></a>
+                  <div id="datetime-code-example" class="spoiler-block">
+                    <pre><code class="language-javascript">dateTimeColumns: Column[] = [
+  &#123;
+    columnKey: 'dateTimeFilter',
+    columnName: 'Date time filter',
+    filterable: true,
+    sortable: true,
+    filterDateOptions: &#123;
+      enableTime: true,
+      time24hr: true,
+      altFormat: 'd/m/Y H:i',
+      dateFormat: 'Z',
+      altInput: true
+    &#125;
+  &#125;, &#123;
+    columnKey: 'dateFilter',
+    columnName: 'Date filter',
+    filterable: true,
+    sortable: true,
+    filterDateOptions: &#123;
+      altFormat: 'd/m/Y',
+      dateFormat: 'd/m/Y',
+      altInput: true
+    &#125;
+  &#125;
+];</code></pre>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section id="installation-section" class="doc-section">
+              <h2 class="section-title">Installation</h2>
+              <div class="section-block">
+                <div class="code-block">
+                  <pre><code class="language-sh">npm install --save angular-datatable-advanced</code></pre>
+                </div>
+                <p>
+                  You'll also need to install dependencies
+                </p>
+                <p>
+                  Angular related dependencies:
+                </p>
+                <div class="code-block">
+                  <pre><code class="language-sh">npm install --save @angular/cdk @angular/forms @angular/material</code></pre>
+                </div>
+                <p>
+                  Flatpickr dependencies:
+                </p>
+                <div class="code-block">
+                  <pre><code class="language-sh">npm install --save flatpickr angularx-flatpickr</code></pre>
+                </div>
+              </div>
+            </section>
+
+            <section id="code-section" class="doc-section">
+              <h2 class="section-title">Setup</h2>
+              <div class="section-block">
+                <div class="code-block">
+                  <h6>Add Material CSS & Flatpickr CSS to angular.json to styles block. You can select another available
+                    Material There</h6>
+                  <pre><code class="language-javascript">}
+  "styles": [
+    // .. other css ...
+    "./node_modules/flatpickr/dist/flatpickr.css",
+    "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+    "src/styles.css"
+  ]
+}</code></pre>
+                </div>
+              </div>
+
+              <div class="section-block">
+                <div class="code-block">
+                  <h6>Add imports to app.module.ts</h6>
+                  <pre><code class="language-javascript">@NgModule(&#123;
+  imports: [
+    // .. other imports ..
+    FormsModule,
+    FlatpickrModule.forRoot(),
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCardModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
+    AngularDatatableAdvancedModule
+  ],
+&#125;)
+export class AppModule &#123; &#125;</code></pre>
+                </div>
+              </div>
+
+              <div class="section-block">
+                <div class="code-block">
+                  <h6>Create array of columns</h6>
+                  <pre><code class="language-javascript">import &#123;Column&#125; from 'angular-datatable-advanced';
+
+columns: Column[] = [
+  &#123;
+    columnKey: 'column1Key',
+    columnName: 'Column 1 header'
+  &#125;,
+  &#123;
+    columnKey: 'column2Key',
+    columnName: 'Column 2 header'
+  &#125;
+];</code></pre>
+                </div>
+              </div>
+
+              <div class="section-block">
+                <div class="code-block">
+                  <h6>Add rows loader</h6>
+                  <pre><code class="language-javascript language-ts language-javascript">import &#123;RowsLoader, LoadResult, RequestParams&#125; from 'angular-datatable-advanced';
+import &#123;Observable, of&#125; from 'rxjs';
+
+rowsLoader: RowsLoader = (filters: RequestParams): Observable&lt;LoadResult&gt; => &#123;
+  // can be replaced with HttpClient call to backend server
+  return of(&#123;
+    totalItems: 1,
+    rows: [
+      &#123;
+        column1Key: 'Column 1 value',
+        column2Key: 'Column 2 value'
+      &#125;
+    ]
+  &#125;);
+&#125;</code></pre>
+                </div>
+              </div>
+
+              <div class="section-block">
+                <div class="code-block">
+                  <h6>Render table</h6>
+                  <pre><code class="language-javascript">&lt;ada-table
+  [pageSize]="10" // default page side
+  [pageSizeOptions]="[10, 20]"  // page size options for pagination component
+  [columns]="columns"
+  [rowsLoader]="rowsLoader"
+&gt;
+&lt;/ada-table&gt;</code></pre>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+          <div id="doc-nav" class="doc-nav">
+
+            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+              <a class="nav-link scrollto" href="#about-section">About</a>
+              <a class="nav-link scrollto" href="#examples-section">Example</a>
+              <nav class="doc-sub-menu nav flex-column">
+                <a class="nav-link scrollto" href="#simple-example">Simple example</a>
+                <a class="nav-link scrollto" href="#set-example">Set filter example</a>
+                <a class="nav-link scrollto" href="#date-time-example">Date & Date-Time picker example</a>
+              </nav>
+              <a class="nav-link scrollto" href="#installation-section">Installation</a>
+              <a class="nav-link scrollto" href="#code-section">Setup</a>
+            </nav>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+<footer id="footer" class="footer text-center">
+  <div class="container">
+    <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+    <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="https://themes.3rdwavemedia.com/"
+                                                                              target="_blank">Xiaoying Riley</a> for
+      developers</small>
+
+  </div>
+</footer>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Column, RowsLoader, LoadResult} from 'angular-datatable-advanced';
+import {Column, RowsLoader, LoadResult, RequestParams} from 'angular-datatable-advanced';
 import {Observable, of} from 'rxjs';
 import {FilterIn} from 'angular-datatable-advanced/lib/model/filter-in';
 
@@ -10,7 +10,7 @@ import {FilterIn} from 'angular-datatable-advanced/lib/model/filter-in';
 })
 export class AppComponent {
 
-  columns: Column[] = [
+  minExampleColumns: Column[] = [
     {
       columnKey: 'plainTextFilter',
       columnName: 'Plain Text filter',
@@ -29,7 +29,10 @@ export class AppComponent {
       sortable: true,
       filterable: true,
       cellRender: row => 'render full object in single column: ' + JSON.stringify(row)
-    },
+    }
+  ];
+
+  columnSetSelect: Column[] = [
     {
       columnKey: 'setFilter',
       columnName: 'Set Filter',
@@ -46,7 +49,11 @@ export class AppComponent {
       columnName: 'Set filter with options from observable',
       filterable: true,
       filterInPromise: this.setFilterObservable()
-    }, {
+    }
+  ];
+
+  dateTimeColumns: Column[] = [
+    {
       columnKey: 'dateTimeFilter',
       columnName: 'Date time filter',
       filterable: true,
@@ -71,7 +78,7 @@ export class AppComponent {
     }
   ];
 
-  rowsLoader: RowsLoader = (filters): Observable<LoadResult> => {
+  rowsLoader: RowsLoader = (filters: RequestParams): Observable<LoadResult> => {
     console.log('Filters: ', JSON.stringify(filters, null, 4));
 
     return of({
