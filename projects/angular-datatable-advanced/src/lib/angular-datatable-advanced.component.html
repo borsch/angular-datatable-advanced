@@ -1,5 +1,11 @@
 <div>
   <mat-table class="ada-table" [dataSource]="dataSource" matSort>
+    <ng-container *ngIf="hasCogMenu()" matColumnDef="cogMenuColumn">
+      <mat-header-cell class="ada-th ada-cog-header" *matHeaderCellDef></mat-header-cell>
+      <mat-cell class="ada-td ada-cog-button" *matCellDef="let row">
+        <ada-cog-menu [cogMenu]="cogMenu" [row]="row"></ada-cog-menu>
+      </mat-cell>
+    </ng-container>
     <ng-container *ngFor="let column of extendedColumns" [matColumnDef]="column.id">
       <mat-header-cell class="ada-th" *matHeaderCellDef>
         {{column.column.columnName}}

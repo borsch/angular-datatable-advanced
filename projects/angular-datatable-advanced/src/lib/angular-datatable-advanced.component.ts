@@ -4,9 +4,11 @@ import {catchError, finalize, mergeAll, tap} from 'rxjs/operators';
 import {MatSort} from '@angular/material/sort';
 import {asapScheduler, BehaviorSubject, Observable, of, scheduled} from 'rxjs';
 import {CollectionViewer, DataSource} from '@angular/cdk/collections';
-import {ColumnWithFilter, RowsLoader, Sort} from './model/models';
+import {CogMenu, ColumnWithFilter, RowsLoader, Sort} from './model/models';
 import {Column, ExtendedColumn} from './model/column';
 import {DomSanitizer} from '@angular/platform-browser';
+
+const COG_MENU_COLUMN = 'cogMenuColumn';
 
 @Component({
   selector: 'ada-table',
@@ -36,6 +38,8 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
   pageSizeOptions = [10, 20];
   @Input()
   rowsLoader: RowsLoader;
+  @Input()
+  cogMenu: Array<CogMenu>;
 
   constructor(private sanitizer: DomSanitizer) {
   }
@@ -95,7 +99,15 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
   }
 
   getColumns() {
-    return this.extendedColumns.map(col => col.id);
+    const columnIds = this.extendedColumns.map(col => col.id);
+    if (this.hasCogMenu()) {
+      columnIds.unshift(COG_MENU_COLUMN);
+    }
+    return columnIds;
+  }
+
+  hasCogMenu() {
+    return this.cogMenu && this.cogMenu.length > 0;
   }
 
   /**

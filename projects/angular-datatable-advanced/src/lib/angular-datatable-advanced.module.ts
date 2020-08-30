@@ -12,9 +12,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import {FilterComponent, FilterSelectByKeyword} from './components/filter/filter.component';
 import {FormsModule} from '@angular/forms';
 import {FlatpickrModule} from 'angularx-flatpickr';
+import { CogMenuComponent } from './components/cog-menu/cog-menu.component';
 
 @NgModule({
-  declarations: [AngularDatatableAdvancedComponent, FilterComponent, FilterSelectByKeyword],
+  declarations: [AngularDatatableAdvancedComponent, FilterComponent, FilterSelectByKeyword, CogMenuComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

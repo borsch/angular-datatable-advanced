@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {RowsLoader} from '../../../angular-datatable-advanced/src/lib/model/models';
+import {CogMenu, RowsLoader} from '../../../angular-datatable-advanced/src/lib/model/models';
 import {Column} from '../../../angular-datatable-advanced/src/lib/model/column';
 import {FilterIn} from '../../../angular-datatable-advanced/src/lib/model/filter-in';
 import {Observable, of} from 'rxjs';
@@ -41,6 +41,7 @@ export class AppComponent {
       columnKey: 'geolocation.type',
       columnName: 'Geolocation type'
     }, {
+      columnKey: 'coords',
       columnName: 'Coordinates',
       cellRender: (row) => row.geolocation && row.geolocation.coordinates
         ? `LNG: ${row.geolocation.coordinates[0]}, LAT: ${row.geolocation.coordinates[1]}`
@@ -67,6 +68,23 @@ export class AppComponent {
         dateFormat: 'd/m/Y',
         altInput: true
       }
+    }
+  ];
+
+  cogMenu: CogMenu[] = [
+    {
+      name: 'Button 1',
+      onClick: item => alert('Click on Button 1')
+    },
+    {
+      name: 'Invalidate',
+      renderCheck: item => item.nametype === 'Valid',
+      onClick: item => item.nametype = 'Invalid'
+    },
+    {
+      name: 'Validate',
+      renderCheck: item => item.nametype === 'Invalid',
+      onClick: item => item.nametype = 'Valid'
     }
   ];
 

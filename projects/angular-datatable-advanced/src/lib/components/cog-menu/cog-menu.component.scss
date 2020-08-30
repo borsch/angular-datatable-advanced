@@ -1,0 +1,14 @@
+::ng-deep .mat-menu-panel.ada-cog-menu {
+  min-height: 10px !important;
+}
+
+.ada-cog-menu-button {
+  cursor: pointer;
+  text-align: center;
+  align-content: center;
+  padding: 5px;
+}
+
+.ada-cog-menu-button:hover {
+  background: rgba(0,0,0,.04);
+}

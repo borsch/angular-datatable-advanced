@@ -24,4 +24,19 @@ export interface Sort {
   column: Column;
 }
 
+export class CogMenu {
+  /**
+   * Name of button
+   */
+  name: string;
+  /**
+   * On click callback
+   */
+  onClick?: (item: any) => void;
+  /**
+   * Checker whether to render button
+   */
+  renderCheck?: (item: any) => boolean;
+}
+
 export type RowsLoader = (parameters: RequestParams) => Observable<LoadResult>;

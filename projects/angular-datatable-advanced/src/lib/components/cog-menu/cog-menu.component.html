@@ -1,0 +1,10 @@
+<mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+<mat-menu #menu class="ada-cog-menu 123" style="min-height: 10px;">
+  <div
+    class="ada-cog-menu-button"
+    *ngFor="let menuItem of cogMenu"
+    [style.display]="menuItem.renderCheck && !menuItem.renderCheck(row) ? 'none' : 'block'"
+    (click)="handleClick(menuItem)">
+    {{menuItem.name}}
+  </div>
+</mat-menu>

@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {FlatpickrDefaultsInterface} from 'angularx-flatpickr/flatpickr-defaults.service';
 
 export class Column {
-  columnKey?: string;
+  columnKey: string;
   columnName: string;
   sortable?: boolean;
   filterable?: boolean;
