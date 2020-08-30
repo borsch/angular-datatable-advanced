@@ -21,3 +21,6 @@
   display: none;
 }
 
+.mat-column-cogMenuColumn {
+  flex: 0 0 45px !important;
+}

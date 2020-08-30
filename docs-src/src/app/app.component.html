@@ -190,6 +190,57 @@ private setFilterObservable(): Observable&lt;Array&lt;FilterIn&gt;&gt; &#123;
                   </div>
                 </div>
               </div>
+
+              <div id="cog-menu-example" class="section-block">
+                <h3 class="block-title">Context menu example</h3>
+                <div>
+                  Table with example of:
+                  <ul>
+                    <li>Plain text column rendered by field name(first column)</li>
+                    <li>Column rendered with nested field(second column)</li>
+                    <li>Column rendered with custom cellRender function(third column)</li>
+                  </ul>
+                </div>
+                <div>
+                  <ada-table
+                    [pageSize]="3"
+                    [pageSizeOptions]="[3, 5]"
+                    [columns]="minExampleColumns"
+                    [rowsLoader]="rowsLoader"
+                    [cogMenu]="cogMenu"
+                  ></ada-table>
+                </div>
+                <div>
+                  <a href="#" data-target="cog-menu-code-example" class="spoiler-trigger"><span>Code example</span></a>
+                  <div id="cog-menu-code-example" class="spoiler-block">
+                    <pre><code class="language-javascript">cogMenu: CogMenu[] = [
+  &#123;
+    name: 'Button 1',
+    onClick: item => alert(`Click on item with JSON: $&#123;JSON.stringify(item)&#125;`)
+  &#125;,
+  &#123;
+    name: 'Button for odd rows',
+    renderCheck: item => parseInt(item.plainTextFilter.charAt(item.plainTextFilter.length - 1), 10) % 2 === 1,
+    onClick: item => alert('Click odd row: ' + item.plainTextFilter)
+  &#125;,
+  &#123;
+    name: 'Button for pair rows',
+    renderCheck: item => parseInt(item.plainTextFilter.charAt(item.plainTextFilter.length - 1), 10) % 2 === 0,
+    onClick: item => alert('Click pair row: ' + item.plainTextFilter)
+  &#125;,
+  &#123;
+    name: 'Set deep field',
+    onClick: item => item.render = &#123;
+      deep: &#123;
+        field: item.plainTextFilter + ' updated'
+      &#125;
+    &#125;
+   &#125;
+  ];
+];</code></pre>
+                  </div>
+                </div>
+              </div>
             </section>
 
             <section id="installation-section" class="doc-section">
@@ -320,6 +371,7 @@ rowsLoader: RowsLoader = (filters: RequestParams): Observable&lt;LoadResult&gt; 
                 <a class="nav-link scrollto" href="#simple-example">Simple example</a>
                 <a class="nav-link scrollto" href="#set-example">Set filter example</a>
                 <a class="nav-link scrollto" href="#date-time-example">Date & Date-Time picker example</a>
+                <a class="nav-link scrollto" href="#cog-menu-example">Context menu example</a>
               </nav>
               <a class="nav-link scrollto" href="#installation-section">Installation</a>
               <a class="nav-link scrollto" href="#code-section">Setup</a>

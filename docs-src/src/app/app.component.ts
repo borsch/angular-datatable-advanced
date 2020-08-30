@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Column, RowsLoader, LoadResult, RequestParams} from 'angular-datatable-advanced';
+import {Column, RowsLoader, LoadResult, RequestParams, CogMenu} from 'angular-datatable-advanced';
 import {Observable, of} from 'rxjs';
 import {FilterIn} from 'angular-datatable-advanced/lib/model/filter-in';
 
@@ -74,6 +74,31 @@ export class AppComponent {
         altFormat: 'd/m/Y',
         dateFormat: 'd/m/Y',
         altInput: true
+      }
+    }
+  ];
+
+  cogMenu: CogMenu[] = [
+    {
+      name: 'Button 1',
+      onClick: item => alert(`Click on item with JSON: ${JSON.stringify(item)}`)
+    },
+    {
+      name: 'Button for odd rows',
+      renderCheck: item => parseInt(item.plainTextFilter.charAt(item.plainTextFilter.length - 1), 10) % 2 === 1,
+      onClick: item => alert('Click odd row: ' + item.plainTextFilter)
+    },
+    {
+      name: 'Button for pair rows',
+      renderCheck: item => parseInt(item.plainTextFilter.charAt(item.plainTextFilter.length - 1), 10) % 2 === 0,
+      onClick: item => alert('Click pair row: ' + item.plainTextFilter)
+    },
+    {
+      name: 'Set deep field',
+      onClick: item => item.render = {
+        deep: {
+          field: item.plainTextFilter + ' updated'
+        }
       }
     }
   ];
