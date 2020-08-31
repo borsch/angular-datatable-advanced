@@ -118,6 +118,10 @@ export class AngularDatatableAdvancedComponent implements OnInit, AfterViewInit,
     this.loadPage(0, this.paginator.pageSize);
   }
 
+  reloadCurrentPage() {
+    this.loadPage(this.paginator.pageIndex, this.paginator.pageSize);
+  }
+
   private loadPage(page, size) {
     this.loadingSubject.next(true);
     this.rowsSubject.next([]);
