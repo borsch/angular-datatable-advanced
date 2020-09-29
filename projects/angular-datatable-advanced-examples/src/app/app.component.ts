@@ -39,7 +39,10 @@ export class AppComponent {
       filterInPromise: this.loadRecordClass()
     }, {
       columnKey: 'geolocation.type',
-      columnName: 'Geolocation type'
+      columnName: 'Geolocation type',
+      onClick: row => {
+        console.log('Geolocation', row);
+      }
     }, {
       columnKey: 'coords',
       columnName: 'Coordinates',
@@ -47,7 +50,10 @@ export class AppComponent {
         ? `LNG: ${row.geolocation.coordinates[0]}, LAT: ${row.geolocation.coordinates[1]}`
         : '-',
       sortable: true,
-      filterable: true
+      filterable: true,
+      onClick: row => {
+        console.log('coords', row);
+      }
     }, {
       columnKey: 'test',
       columnName: 'Test date time picker',

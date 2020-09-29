@@ -12,6 +12,7 @@ export class Column {
   filterIn?: Array<FilterIn> = [];
   filterInPromise?: Observable<Array<FilterIn>> = null;
   filterDateOptions?: FlatpickrDefaultsInterface;
+  onClick?: (row: any) => void;
 }
 
 export class ExtendedColumn {
