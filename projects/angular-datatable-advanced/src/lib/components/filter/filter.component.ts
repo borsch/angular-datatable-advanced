@@ -15,7 +15,10 @@ export class FilterComponent implements OnInit {
   column: ExtendedColumn;
   @Input()
   filterUpdateSubject: BehaviorSubject<ExtendedColumn>;
+  @Input()
+  enabledFilterTypes: Array<FilterType> = null;
 
+  FILTER_TYPES = FilterType;
   filterIn: Array<FilterIn> = [];
   filterType: FilterType = FilterType.EQUALS;
   // default filter
@@ -38,6 +41,12 @@ export class FilterComponent implements OnInit {
           this.filterIn = result || [];
           this.filterType = FilterType.IN;
         });
+    }
+
+    if (this.enabledFilterTypes) {
+      if (this.isSingleFilterEnabled() || this.enabledFilterTypes.indexOf(this.filterType) < 0) {
+        this.filterType = this.enabledFilterTypes[0];
+      }
     }
   }
 
@@ -93,6 +102,13 @@ export class FilterComponent implements OnInit {
     }
   }
 
+  isFilterEnabled(filterType: FilterType): boolean {
+    return !this.enabledFilterTypes || this.enabledFilterTypes.indexOf(filterType) > -1;
+  }
+
+  isSingleFilterEnabled() {
+    return this.enabledFilterTypes && this.enabledFilterTypes.length === 1;
+  }
 }
 
 @Pipe({

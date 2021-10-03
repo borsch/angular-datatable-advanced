@@ -1,4 +1,4 @@
-import {Filter} from './filter';
+import {Filter, FilterType} from './filter';
 import {FilterIn} from './filter-in';
 import {Observable} from 'rxjs';
 import {FlatpickrDefaultsInterface} from 'angularx-flatpickr/flatpickr-defaults.service';
@@ -8,6 +8,7 @@ export class Column {
   columnName: string;
   sortable?: boolean;
   filterable?: boolean;
+  enabledFilters?: Array<FilterType> = null;
   cellRender?: (row: any) => string;
   filterIn?: Array<FilterIn> = [];
   filterInPromise?: Observable<Array<FilterIn>> = null;

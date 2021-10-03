@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {CogMenu, RowsLoader} from '../../../angular-datatable-advanced/src/lib/model/models';
 import {Column} from '../../../angular-datatable-advanced/src/lib/model/column';
 import {FilterIn} from '../../../angular-datatable-advanced/src/lib/model/filter-in';
 import {Observable, of} from 'rxjs';
+import {FilterType} from '../../../angular-datatable-advanced/src/lib/model/filter';
 
 @Component({
   selector: 'app-root',
@@ -69,6 +70,26 @@ export class AppComponent {
       columnKey: 'test',
       columnName: 'Test date picker',
       filterable: true,
+      filterDateOptions: {
+        altFormat: 'd/m/Y',
+        dateFormat: 'd/m/Y',
+        altInput: true
+      }
+    }, {
+      columnKey: 'testRangeOnly',
+      columnName: 'Test date picker: range only',
+      filterable: true,
+      enabledFilters: [FilterType.RANGE],
+      filterDateOptions: {
+        altFormat: 'd/m/Y',
+        dateFormat: 'd/m/Y',
+        altInput: true
+      }
+    }, {
+      columnKey: 'testMultipleEnabled',
+      columnName: 'Test date picker: multiple allowed',
+      filterable: true,
+      enabledFilters: [FilterType.RANGE, FilterType.GREATER_THAN_OR_EQUALS, FilterType.LESS_THAN_OR_EQUALS],
       filterDateOptions: {
         altFormat: 'd/m/Y',
         dateFormat: 'd/m/Y',
