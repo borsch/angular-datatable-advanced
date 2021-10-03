@@ -1,8 +1,12 @@
-import {Component, Input, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {Component, Inject, Input, OnInit, Pipe, PipeTransform} from '@angular/core';
 import {ExtendedColumn} from '../../model/column';
 import {FilterType} from '../../model/filter';
 import {BehaviorSubject} from 'rxjs';
 import {FilterIn} from '../../model/filter-in';
+import {
+  ANGULAR_DATATABLE_ADVANCED_CONFIGURATION,
+  AngularDatatableAdvancedConfiguration
+} from '../../angular-datatable-advanced-configuration';
 
 @Component({
   selector: 'ada-filter',
@@ -29,6 +33,10 @@ export class FilterComponent implements OnInit {
   filter3: Array<any> = [];
 
   filterOutSelect = null;
+
+  constructor(
+      @Inject(ANGULAR_DATATABLE_ADVANCED_CONFIGURATION) readonly configuration: AngularDatatableAdvancedConfiguration
+  ) {}
 
   ngOnInit(): void {
     if (this.column.column.filterIn) {

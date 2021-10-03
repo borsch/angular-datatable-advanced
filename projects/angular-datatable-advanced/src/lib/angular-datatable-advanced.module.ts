@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import { AngularDatatableAdvancedComponent } from './angular-datatable-advanced.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -13,6 +13,11 @@ import {FilterComponent, FilterSelectByKeyword} from './components/filter/filter
 import {FormsModule} from '@angular/forms';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import { CogMenuComponent } from './components/cog-menu/cog-menu.component';
+import {
+  ANGULAR_DATATABLE_ADVANCED_CONFIGURATION,
+  AngularDatatableAdvancedConfiguration,
+  DEFAULT_CONFIG
+} from './angular-datatable-advanced-configuration';
 
 @NgModule({
   declarations: [AngularDatatableAdvancedComponent, FilterComponent, FilterSelectByKeyword, CogMenuComponent],
@@ -31,4 +36,14 @@ import { CogMenuComponent } from './components/cog-menu/cog-menu.component';
   ],
   exports: [AngularDatatableAdvancedComponent]
 })
-export class AngularDatatableAdvancedModule { }
+export class AngularDatatableAdvancedModule {
+  static forRoot(configuration?: AngularDatatableAdvancedConfiguration): ModuleWithProviders {
+    return {
+      ngModule: AngularDatatableAdvancedModule,
+      providers: [{
+        provide: ANGULAR_DATATABLE_ADVANCED_CONFIGURATION,
+        useValue: configuration || DEFAULT_CONFIG
+      }]
+    };
+  }
+}
