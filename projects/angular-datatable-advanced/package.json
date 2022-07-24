@@ -15,7 +15,7 @@
     "angularx-flatpickr": ">= 6.4.0",
     "flatpickr": ">= 4.6.6",
     "rxjs": ">= 6.5.4",
-    "tslib": ">=  1.10.0",
+    "tslib": "2.4.0",
     "zone.js": ">= 0.10.2"
   },
   "author": {
