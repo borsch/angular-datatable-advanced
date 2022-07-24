@@ -15,7 +15,6 @@
     "angularx-flatpickr": ">= 6.4.0",
     "flatpickr": ">= 4.6.6",
     "rxjs": ">= 6.5.4",
-    "tslib": "2.4.0",
     "zone.js": ">= 0.10.2"
   },
   "author": {
@@ -36,6 +35,9 @@
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://github.com/borsch/angular-datatable-advanced/issues"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
   },
   "homepage": "https://github.com/borsch/angular-datatable-advanced#readme"
 }

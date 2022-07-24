@@ -37,7 +37,7 @@ import {
   exports: [AngularDatatableAdvancedComponent]
 })
 export class AngularDatatableAdvancedModule {
-  static forRoot(configuration?: AngularDatatableAdvancedConfiguration): ModuleWithProviders {
+  static forRoot(configuration?: AngularDatatableAdvancedConfiguration): ModuleWithProviders<AngularDatatableAdvancedModule> {
     return {
       ngModule: AngularDatatableAdvancedModule,
       providers: [{
