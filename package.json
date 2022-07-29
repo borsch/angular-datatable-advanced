@@ -31,7 +31,6 @@
     "@angular/material": "^10.2.7",
     "@angular/platform-browser": "~10.2.5",
     "@angular/platform-browser-dynamic": "~10.2.5",
-    "angularx-flatpickr": "^6.4.0",
     "flatpickr": "^4.6.6",
     "rxjs": "~6.5.4",
     "tslib": "^2.0.0",

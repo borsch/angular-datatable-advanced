@@ -52,4 +52,4 @@ const DEFAULT_CONFIG: AngularDatatableAdvancedConfiguration = {
 
 export { DEFAULT_CONFIG };
 
-export const ANGULAR_DATATABLE_ADVANCED_CONFIGURATION = new InjectionToken('ANGULAR_DATATABLE_ADVANCED_CONFIGURATION');
+export const ANGULAR_DATATABLE_ADVANCED_CONFIGURATION = new InjectionToken<AngularDatatableAdvancedConfiguration>('ANGULAR_DATATABLE_ADVANCED_CONFIGURATION');

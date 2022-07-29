@@ -18,6 +18,7 @@
         <option value="LESS_THAN_OR_EQUALS" *ngIf="hasDateTimeSelect() && isFilterEnabled(FILTER_TYPES.LESS_THAN_OR_EQUALS)">{{configuration.filterTranslate.lessThanOrEquals}}</option>
       </select>
     </div>
+
     <div (click)="ignoreMenuClick($event);" *ngIf="hasSetSelect()" class="ada-filter-block">
       <input type="text" class="ada-filter-input ada-filter-input-small" [placeholder]="configuration.filterTranslate.filterOutOptions" [(ngModel)]="filterOutSelect">
       <div class="ada-filter-select-block">
@@ -28,19 +29,11 @@
       </div>
     </div>
     <div (click)="ignoreMenuClick($event);" *ngIf="!hasSetSelect()" class="ada-filter-block">
-      <input type="text" *ngIf="!hasDateTimeSelect()" class="ada-filter-input" placeholder="{{filterType === 'RANGE' ? configuration.filterTranslate.filterRangeFrom : configuration.filterTranslate.filterPlaceholder}}" [(ngModel)]="filter1">
-
-      <input type="text" *ngIf="hasDateTimeSelect()"
-             mwlFlatpickr [options]="this.column.column.filterDateOptions" [convertModelValue]="true"
-             class="ada-filter-input" placeholder="{{filterType === 'RANGE' ? configuration.filterTranslate.filterRangeFrom : configuration.filterTranslate.filterPlaceholder}}" [(ngModel)]="filter1"
-      >
+      <input type="text" #input class="ada-filter-input" placeholder="{{filterType === 'RANGE' ? configuration.filterTranslate.filterRangeFrom : configuration.filterTranslate.filterPlaceholder}}" [(ngModel)]="filter1">
     </div>
-    <div (click)="ignoreMenuClick($event);" *ngIf="filterType === 'RANGE' && !hasSetSelect()" class="ada-filter-block">
-      <input type="text" *ngIf="!hasDateTimeSelect()" class="ada-filter-input" [placeholder]="configuration.filterTranslate.filterRangeTo" [(ngModel)]="filter2">
 
-      <input type="text" *ngIf="hasDateTimeSelect()"
-             mwlFlatpickr [options]="this.column.column.filterDateOptions" [convertModelValue]="true"
-             class="ada-filter-input" [placeholder]="configuration.filterTranslate.filterRangeTo" [(ngModel)]="filter2">
+    <div (click)="ignoreMenuClick($event);" *ngIf="!hasSetSelect()" [hidden]="filterType !== 'RANGE'" class="ada-filter-block">
+      <input type="text" #tillInput class="ada-filter-input" [placeholder]="configuration.filterTranslate.filterRangeTo" [(ngModel)]="filter2">
     </div>
     <div style="text-align: center;">
       <button class="ada-filter-button ada-apply-button" (click)="applyFilter()">{{configuration.filterTranslate.applyFilter}}</button>

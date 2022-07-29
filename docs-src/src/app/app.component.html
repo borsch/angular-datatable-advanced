@@ -26,9 +26,7 @@
                     <li>Text</li>
                     <li>Filtering with multi-select. support filter loading via Observable</li>
                     <li>Date & Date-Time picker. As picker <a href="https://flatpickr.js.org/"
-                                                              target="_blank">Flatpickr</a> is used with <a
-                      href="https://github.com/mattlewis92/angularx-flatpickr" target="_blank">angularx-flatpickr</a> as
-                      wrapper
+                                                              target="_blank">Flatpickr</a> is used
                     </li>
                   </ul>
                 </div>
@@ -262,7 +260,7 @@ private setFilterObservable(): Observable&lt;Array&lt;FilterIn&gt;&gt; &#123;
                   Flatpickr dependencies:
                 </p>
                 <div class="code-block">
-                  <pre><code class="language-sh">npm install --save flatpickr angularx-flatpickr</code></pre>
+                  <pre><code class="language-sh">npm install --save flatpickr</code></pre>
                 </div>
               </div>
             </section>
@@ -291,7 +289,6 @@ private setFilterObservable(): Observable&lt;Array&lt;FilterIn&gt;&gt; &#123;
   imports: [
     // .. other imports ..
     FormsModule,
-    FlatpickrModule.forRoot(),
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
@@ -299,7 +296,7 @@ private setFilterObservable(): Observable&lt;Array&lt;FilterIn&gt;&gt; &#123;
     MatCardModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    AngularDatatableAdvancedModule
+    AngularDatatableAdvancedModule.forRoot()
   ],
 &#125;)
 export class AppModule &#123; &#125;</code></pre>
