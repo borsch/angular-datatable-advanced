@@ -11,7 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {FilterComponent, FilterSelectByKeyword} from './components/filter/filter.component';
 import {FormsModule} from '@angular/forms';
-import {FlatpickrModule} from 'angularx-flatpickr';
 import { CogMenuComponent } from './components/cog-menu/cog-menu.component';
 import {
   ANGULAR_DATATABLE_ADVANCED_CONFIGURATION,
@@ -25,7 +24,6 @@ import {
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    FlatpickrModule.forRoot(),
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,

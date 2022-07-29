@@ -2,10 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {AngularDatatableAdvancedModule} from 'angular-datatable-advanced';
+import {AngularDatatableAdvancedModule} from '../../../projects/angular-datatable-advanced/src/public-api';
 import {MatMenuModule} from '@angular/material/menu';
 import {FormsModule} from '@angular/forms';
-import {FlatpickrModule} from 'angularx-flatpickr';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -20,7 +19,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   imports: [
     BrowserModule,
     FormsModule,
-    FlatpickrModule.forRoot(),
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
@@ -28,7 +26,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatCardModule,
     MatMenuModule,
     MatProgressSpinnerModule,
-    AngularDatatableAdvancedModule
+    AngularDatatableAdvancedModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

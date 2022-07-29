@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import {Column, RowsLoader, LoadResult, RequestParams, CogMenu} from 'angular-datatable-advanced';
+import {Column, RowsLoader, LoadResult, RequestParams, CogMenu, FilterIn} from '../../../projects/angular-datatable-advanced/src/public-api';
 import {Observable, of} from 'rxjs';
-import {FilterIn} from 'angular-datatable-advanced/lib/model/filter-in';
 
 @Component({
   selector: 'app-root',

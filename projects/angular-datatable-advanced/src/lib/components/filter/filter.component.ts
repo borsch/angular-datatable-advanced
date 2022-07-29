@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, Pipe, PipeTransform} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, Input, OnInit, Pipe, PipeTransform, ViewChild} from '@angular/core';
 import {ExtendedColumn} from '../../model/column';
 import {FilterType} from '../../model/filter';
 import {BehaviorSubject} from 'rxjs';
@@ -7,13 +7,14 @@ import {
   ANGULAR_DATATABLE_ADVANCED_CONFIGURATION,
   AngularDatatableAdvancedConfiguration
 } from '../../angular-datatable-advanced-configuration';
+import flatpickr from 'flatpickr';
 
 @Component({
   selector: 'ada-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
-export class FilterComponent implements OnInit {
+export class FilterComponent implements AfterViewInit {
 
   @Input()
   column: ExtendedColumn;
@@ -34,18 +35,25 @@ export class FilterComponent implements OnInit {
 
   filterOutSelect = null;
 
+  @ViewChild('input')
+  input: ElementRef;
+  @ViewChild('tillInput')
+  tillInput: ElementRef;
+
+  flatPickrInput: flatpickr.Instance;
+  flatPickrInputTill: flatpickr.Instance;
+
   constructor(
       @Inject(ANGULAR_DATATABLE_ADVANCED_CONFIGURATION) readonly configuration: AngularDatatableAdvancedConfiguration
   ) {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     if (this.column.column.filterIn) {
       this.filterIn = this.column.column.filterIn;
       this.filterType = FilterType.IN;
     } else if (this.column.column.filterInPromise) {
       this.column.column.filterInPromise
-        .toPromise()
-        .then(result => {
+        .subscribe(result => {
           this.filterIn = result || [];
           this.filterType = FilterType.IN;
         });
@@ -55,6 +63,14 @@ export class FilterComponent implements OnInit {
       if (this.isSingleFilterEnabled() || this.enabledFilterTypes.indexOf(this.filterType) < 0) {
         this.filterType = this.enabledFilterTypes[0];
       }
+    }
+
+    if (this.hasDateTimeSelect()) {
+      const options = this.column.column.filterDateOptions || {};
+      options.mode = 'single';
+
+      this.flatPickrInput = flatpickr(this.input.nativeElement, options);
+      this.flatPickrInputTill = flatpickr(this.tillInput.nativeElement, options);
     }
   }
 
@@ -70,8 +86,24 @@ export class FilterComponent implements OnInit {
         value1: this.filter1
       };
 
+      if (this.flatPickrInput) {
+        this.column.filter.value1 = this.flatPickrInput.parseDate(
+          this.filter1,
+          this.flatPickrInput.config.dateFormat,
+          !this.flatPickrInput.config.enableTime
+        );
+      }
+
       if (this.filterType === FilterType.RANGE) {
         this.column.filter.value2 = this.filter2;
+
+        if (this.flatPickrInputTill) {
+          this.column.filter.value2 = this.flatPickrInputTill.parseDate(
+            this.filter2,
+            this.flatPickrInputTill.config.dateFormat,
+            !this.flatPickrInputTill.config.enableTime
+          );
+        }
       }
     }
 
@@ -87,6 +119,10 @@ export class FilterComponent implements OnInit {
     this.filter1 = null;
     this.filter2 = null;
     this.filter3 = [];
+    if (this.hasDateTimeSelect()) {
+      this.flatPickrInput.clear();
+      this.flatPickrInputTill.clear();
+    }
     this.filterUpdateSubject.next(this.column);
   }
 
