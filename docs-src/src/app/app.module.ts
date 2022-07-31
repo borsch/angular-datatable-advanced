@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import {AngularDatatableAdvancedModule} from '../../../projects/angular-datatable-advanced/src/public-api';
+import {AngularDatatableAdvancedModule} from '../../../src/public-api';
 import {MatMenuModule} from '@angular/material/menu';
 import {FormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';

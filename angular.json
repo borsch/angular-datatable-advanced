@@ -5,36 +5,36 @@
   "projects": {
     "angular-datatable-advanced": {
       "projectType": "library",
-      "root": "projects/angular-datatable-advanced",
-      "sourceRoot": "projects/angular-datatable-advanced/src",
+      "root": "",
+      "sourceRoot": "src",
       "prefix": "ada",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/angular-datatable-advanced/tsconfig.lib.json",
-            "project": "projects/angular-datatable-advanced/ng-package.json"
+            "tsConfig": "tsconfig.lib.json",
+            "project": "ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/angular-datatable-advanced/tsconfig.lib.prod.json"
+              "tsConfig": "tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/angular-datatable-advanced/src/test.ts",
-            "tsConfig": "projects/angular-datatable-advanced/tsconfig.spec.json",
-            "karmaConfig": "projects/angular-datatable-advanced/karma.conf.js"
+            "main": "src/test.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/angular-datatable-advanced/tsconfig.lib.json",
-              "projects/angular-datatable-advanced/tsconfig.spec.json"
+              "tsconfig.lib.json",
+              "tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
