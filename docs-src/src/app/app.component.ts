@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Column, RowsLoader, LoadResult, RequestParams, CogMenu, FilterIn} from '../../../projects/angular-datatable-advanced/src/public-api';
+import {Column, RowsLoader, LoadResult, RequestParams, CogMenu, FilterIn} from '../../../src/public-api';
 import {Observable, of} from 'rxjs';
 
 @Component({
