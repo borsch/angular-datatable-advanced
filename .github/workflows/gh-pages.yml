@@ -19,9 +19,9 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm install --force
+          npm install
           npm run build
-          npm install --prefix docs-src --force
+          npm install --prefix docs-src
           npm run build --prefix docs-src
 
       - name: Deploy 🚀

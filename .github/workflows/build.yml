@@ -16,5 +16,5 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm install --force
+          npm install
           npm run build
